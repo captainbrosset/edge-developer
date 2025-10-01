@@ -340,7 +340,7 @@ async function main() {
   await execute(`git checkout -b ${branchName}`);
   
   console.log(`Adding and committing the new file`);
-  await execute(`git add .`);
+  await execute(`git add ${releaseNotesPath}`);
   await execute(`git commit -m "New web platform release notes for ${nextBetaVersion}"`);
   
   console.log(`Pushing the file to the remote repo`);
