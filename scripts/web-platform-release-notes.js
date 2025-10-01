@@ -31,8 +31,14 @@ function longDate(dateString) {
 }
 
 async function execute(cmd) {
-  const stdout = await execSync(cmd);
-  return stdout.toString();
+  try {
+    const stdout = await execSync(cmd);
+    return stdout.toString();
+  } catch (error) {
+    console.error(`Error executing command "${cmd}": ${error.message}`);
+    console.log(error.stdout.toString());
+    process.exit(1);
+  }
 }
 
 async function releaseNotesAlreadyExists(version) {
