@@ -36,7 +36,7 @@ async function execute(cmd) {
 }
 
 async function releaseNotesAlreadyExists(version) {
-  const response = await fetch(`https://raw.githubusercontent.com/MicrosoftDocs/edge-developer/refs/heads/main/microsoft-edge/web-platform/release-notes/${version}.md`);
+  const response = await fetch(`https://raw.githubusercontent.com/captainbrosset/edge-developer/refs/heads/main/microsoft-edge/web-platform/release-notes/${version}.md`);
 
   // Github.com normally responds with 404 if the file doesn't exist. So this should catch it.
   if (response.status !== 200) {
@@ -49,7 +49,7 @@ async function releaseNotesAlreadyExists(version) {
 }
 
 async function releaseNotesDraftAlreadyExists(version, branchName) {
-  const response = await fetch(`https://raw.githubusercontent.com/MicrosoftDocs/edge-developer/refs/heads/${branchName}/microsoft-edge/web-platform/release-notes/${version}.md`);
+  const response = await fetch(`https://raw.githubusercontent.com/captainbrosset/edge-developer/refs/heads/${branchName}/microsoft-edge/web-platform/release-notes/${version}.md`);
 
   // Github.com normally responds with 404 if the file doesn't exist. So this should catch it.
   if (response.status !== 200) {
@@ -62,7 +62,7 @@ async function releaseNotesDraftAlreadyExists(version, branchName) {
 }
 
 function getReleaseNoteMDFilePath(version, branchName) {
-  return `https://github.com/MicrosoftDocs/edge-developer/blob/${branchName}/microsoft-edge/web-platform/release-notes/${version}.md`;
+  return `https://github.com/captainbrosset/edge-developer/blob/${branchName}/microsoft-edge/web-platform/release-notes/${version}.md`;
 }
 
 async function getActiveEdgeOTs() {
@@ -346,7 +346,7 @@ async function main() {
 
   console.log("Opening an issue to notify the team about the new release notes draft.");
   const title = `Microsoft Edge Beta ${nextBetaVersion} web platform release notes ready for review`;
-  const body = `The release notes draft for the next Microsoft Edge beta version ${nextBetaVersion} has been generated in [${nextBetaVersion}.md](${getReleaseNoteMDFilePath(nextBetaVersion, branchName)}) on the ${branchName} branch.\n\nPlease [create a pull request](https://github.com/MicrosoftDocs/edge-developer/compare/main...${branchName}), update the content as needed, and close this issue.`;
+  const body = `The release notes draft for the next Microsoft Edge beta version ${nextBetaVersion} has been generated in [${nextBetaVersion}.md](${getReleaseNoteMDFilePath(nextBetaVersion, branchName)}) on the ${branchName} branch.\n\nPlease [create a pull request](https://github.com/captainbrosset/edge-developer/compare/main...${branchName}), update the content as needed, and close this issue.`;
 
   const octokit = github.getOctokit(process.env.token);
   await octokit.rest.issues.create({
