@@ -332,9 +332,9 @@ async function main() {
 
   console.log(`Committing the new file to branch ${branchName}...`);
 
-  console.log("Configuring git");
-  await execute(`git config --local user.email "${ process.env.action }@users.noreply.github.com"`);
-  await execute(`git config --local user.name "${ process.env.action }"`);
+  console.log(`Configuring git with ${ process.env.actor }`);
+  await execute(`git config --local user.email "${ process.env.actor }@users.noreply.github.com"`);
+  await execute(`git config --local user.name "${ process.env.actor }"`);
   
   console.log(`Creating branch ${branchName}`);
   await execute(`git checkout -b ${branchName}`);
@@ -356,7 +356,7 @@ async function main() {
 
   const octokit = github.getOctokit(process.env.token);
   await octokit.rest.issues.create({
-    owner: "MicrosoftDocs",
+    owner: "captainbrosset",
     repo: "edge-developer",
     title,
     body
